@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ProjectAPI.Models
 {
-    public class ProjectDbContext :DbContext
+    public class ProjectDbContext : DbContext
     {
-        public ProjectDbContext(DbContextOptions<ProjectDbContext> options): base(options)
+        public ProjectDbContext(DbContextOptions<ProjectDbContext> options) : base(options)
         {
 
         }
@@ -17,5 +17,7 @@ namespace ProjectAPI.Models
         public DbSet<User> Users { get; set; }
 
         public DbSet<Item> Items { get; set; }
+
+        
     }
 }

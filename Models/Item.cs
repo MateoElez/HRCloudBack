@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace ProjectAPI.Models
 {
-    public class Item
+    public class Item : INameId
     {
-        [Key]
-        public int ItemId { get; set; }
+
+        /*[Key]
+        public int ItemId { get; set; }*/
 
         [Column(TypeName = "nvarchar(150)")]
         public string ItemName { get; set; }
@@ -21,7 +22,6 @@ namespace ProjectAPI.Models
 
         [Column(TypeName = "nvarchar(150)")]
         public string ItemImageUrl { get; set; }
-        
     }
 }
 
