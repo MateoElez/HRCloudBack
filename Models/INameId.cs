@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectAPI.Models
 {
-    class INameId
+    public class INameId
     {
         [Key]
          public int Id { get; set; }
