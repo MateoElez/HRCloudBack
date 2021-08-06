@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectAPI.Models
 {
-    public class Item : INameId
+    public class Item : TEntity
     {
 
         /*[Key]

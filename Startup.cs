@@ -14,7 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-
+using AutoMapper;
 
 
 namespace ProjectAPI
@@ -33,7 +33,7 @@ namespace ProjectAPI
         {
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

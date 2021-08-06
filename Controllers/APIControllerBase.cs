@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectAPI.Models;
+using ProjectAPI.Models.BaseFolder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,38 +14,46 @@ namespace ProjectAPI.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public abstract class APIControllerBase<TEntity> : ControllerBase
-        where TEntity : INameId
+        where TEntity : Models.TEntity
     {
         public readonly ProjectDbContext _context;
         protected DbSet<TEntity> _dbSet { get; set; }
+        private readonly IMapper _mapper;
 
-        //public APIControllerBase() { }
-
-        public APIControllerBase(ProjectDbContext context)
+        public APIControllerBase(ProjectDbContext context, IMapper mapper)
         {
             _context = context;
             _dbSet = _context.Set<TEntity>();
+            _mapper = mapper;
         }
 
         // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TEntity>>> GetAll()
-        { 
-            return await _dbSet.ToListAsync();
-        }
-
-        // GET: api/Items/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TEntity>> GetById(int id)
+        public async Task<ActionResult<IEnumerable<BaseDto>>> GetAll()
         {
-            var item = await _dbSet.FindAsync(id);
 
-            if (item == null)
+            var baseDto = await _dbSet.ToListAsync();
+
+            if (baseDto == null)
             {
                 return NotFound();
             }
 
-            return item;
+            return Ok(baseDto);
+        }
+
+        // GET: api/Items/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<BaseDto>> GetById(int id)
+        {
+            var baseDto = await _dbSet.FindAsync(id);
+
+            if (baseDto == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(baseDto);
         }
 
         // PUT: api/Items/5

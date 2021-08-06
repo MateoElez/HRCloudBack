@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace ProjectAPI.Controllers
     [ApiController]
     public class UserController : APIControllerBase<User>
     {        
-        public UserController(ProjectDbContext context) : base(context)
+        public UserController(ProjectDbContext context, IMapper mapper) : base(context, mapper)
         {
         }
     }
