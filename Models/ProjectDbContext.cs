@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ProjectAPI.Models.BaseFolder;
 
 namespace ProjectAPI.Models
 {
@@ -17,7 +18,6 @@ namespace ProjectAPI.Models
         public DbSet<User> Users { get; set; }
 
         public DbSet<Item> Items { get; set; }
-
         
     }
 }

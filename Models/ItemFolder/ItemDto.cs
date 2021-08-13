@@ -8,10 +8,12 @@ namespace ProjectAPI.Models.ItemFolder
 {
     public class ItemDto : BaseDto
     {
-       
+        public ItemDto(Item item)
+        {
+            Id = item.Id;
+        }
         public string ItemName { get; set; }
         public int ItemPrice { get; set; }
         public string ItemImageUrl { get; set; }
-        public string ItemCategory { get; set; }
     }
 }

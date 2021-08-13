@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 
 namespace ProjectAPI.Models.BaseFolder
 {
-    public class BaseDto
+    public abstract class BaseDto
     {
         public BaseDto()
+        {}
+
+        public BaseDto(TEntity entity)
         {
-            
+            Id = entity.Id;
         }
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
     }
 }

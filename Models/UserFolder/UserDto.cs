@@ -8,12 +8,17 @@ namespace ProjectAPI.Models.UserFolder
 {
     public class UserDto : BaseDto
     {
+
+        public UserDto(User user)
+        {
+            Id = user.Id;
+        }
         public string Username { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Orders { get; set; }
-        public string Cart { get; set; }
-        public string Random { get; set; }
+        public Item[] Cart { get; set; }
+        //public Item[] Orders { get; set; }
+        
     }
 }

@@ -11,12 +11,14 @@ using ProjectAPI.Models.ItemFolder;
 
 namespace ProjectAPI.Controllers
 {
-   //[Route("api/[controller]")]
-   [ApiController]
-    public class ItemsController : APIControllerBase<Item>
+    [ApiController]
+    [Route("api/Items")]
+    public class ItemsController : APIControllerBase<Item, ItemDto>
     {
         public ItemsController(ProjectDbContext context, IMapper mapper) : base(context, mapper) {
             // nesto
         }
+
+
     }
 }

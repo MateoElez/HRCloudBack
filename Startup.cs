@@ -33,6 +33,16 @@ namespace ProjectAPI
         {
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>

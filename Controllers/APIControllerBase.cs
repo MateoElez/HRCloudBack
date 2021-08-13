@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 namespace ProjectAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public abstract class APIControllerBase<TEntity> : ControllerBase
+    //[Route("api/[controller]")]
+    public abstract class APIControllerBase<TEntity, BaseDto> : ControllerBase
+        where BaseDto : Models.BaseFolder.BaseDto
         where TEntity : Models.TEntity
     {
         public readonly ProjectDbContext _context;
@@ -27,46 +28,62 @@ namespace ProjectAPI.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Items
+        // GET: api/[controller]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BaseDto>>> GetAll()
         {
+            //var baseDto = new BaseDto();
+            //var mappedDto = _mapper.Map<TEntity, BaseDto>(_dbSet, await _dbSet.ToListAsync());
 
-            var baseDto = await _dbSet.ToListAsync();
+            /*var baseDto = await _dbSet.Select(t => new BaseDto()
+            {
+                Id = t.Id
+            }).ToListAsync();*/
 
-            if (baseDto == null)
+            var entity = await _dbSet.ToListAsync();
+
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            return Ok(baseDto);
+            return Ok(entity);
         }
 
         // GET: api/Items/5
         [HttpGet("{id}")]
         public async Task<ActionResult<BaseDto>> GetById(int id)
         {
-            var baseDto = await _dbSet.FindAsync(id);
+            //var baseDto = await _dbSet.FindAsync(id);
+            /*var _baseDto = await _dbSet.Where(u => u.Id == id)
+                .Select(t => new BaseDto()
+                {
+                    Id = t.Id
+                })
+                .ToListAsync();*/
 
-            if (baseDto == null)
+            var entity = await _dbSet.FindAsync(id);
+            
+
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            return Ok(baseDto);
+            return Ok(entity);
         }
 
         // PUT: api/Items/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutById(int id, TEntity item)
+        public async Task<IActionResult> PutById(int id, BaseDto item)
         {
             if (id != item.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(item).State = EntityState.Modified;
+            _context.Entry(_mapper.Map<TEntity>(item)).State = EntityState.Modified;
 
             try
             {
@@ -90,12 +107,26 @@ namespace ProjectAPI.Controllers
         // POST: api/Items
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TEntity>> PostItem(TEntity item)
+        public async Task<ActionResult<BaseDto>> PostItem(TEntity item)
         {
             _dbSet.Add(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetItem", new { id = item.Id }, item);
+            //new code for DTO
+            _context.Entry(item).Property(x => x.Id);
+            _dbSet.Load();
+
+            /*var dto = new BaseDto()
+            {
+                Id = item.Id
+            };*/
+
+            var dto = _mapper.Map<BaseDto>(item);
+            
+
+           
+
+            return CreatedAtAction("GetById", new { id = item.Id }, dto);
         }
 
         // DELETE: api/Items/5
