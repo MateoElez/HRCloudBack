@@ -20,16 +20,17 @@ namespace ProjectAPI.Models
         [ForeignKey("UserName")]
         [Required]
         [Column(TypeName= "nvarchar(150)")]
-        public string Username { get; set; }
+        public virtual string Username { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public virtual string Password { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
+        public virtual string FirstName { get; set; }
 
         [Required]
-        public string LastName { get; set; }
-        
+        public virtual string LastName { get; set; }
+
+       // public virtual Item Cart { get; set; }
     }
 }

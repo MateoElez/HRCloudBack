@@ -15,7 +15,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using AutoMapper;
-
+using ProjectAPI.Models.ItemFolder;
+using ProjectAPI.Models.UserFolder;
+using ProjectAPI.Models.CartFolder;
 
 namespace ProjectAPI
 {
@@ -37,6 +39,12 @@ namespace ProjectAPI
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
+                mc.CreateMap<Item, ItemDto>();
+                mc.CreateMap<User, UserDto>();
+                mc.CreateMap<ItemDto, Item>();
+                mc.CreateMap<UserDto, User>();
+                mc.CreateMap<Cart, CartDto>();
+                mc.CreateMap<CartDto, Cart>();
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
@@ -71,6 +79,8 @@ namespace ProjectAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectAPI v1"));
             }
+
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

@@ -21,15 +21,15 @@ namespace ProjectAPI.Models
         [ForeignKey("ItemName")]
         [Required]
         [Column(TypeName = "nvarchar(150)")]
-        public string ItemName { get; set; }
+        public virtual string ItemName { get; set; }
 
         [Required]
         [Column(TypeName = "integer")]
-        public int ItemPrice { get; set; }
+        public virtual int ItemPrice { get; set; }
 
         [Required]
         [Column(TypeName = "nvarchar(150)")]
-        public string ItemImageUrl { get; set; }
+        public virtual string ItemImageUrl { get; set; }
     }
 }
 
