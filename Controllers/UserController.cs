@@ -12,7 +12,7 @@ using ProjectAPI.Models.UserFolder;
 namespace ProjectAPI.Controllers
 {
     [ApiController]
-    [Route("api/User")]
+    [Route("api/[controller]")]
     public class UserController : APIControllerBase<User, UserDto>
     {        
         public UserController(ProjectDbContext context, IMapper mapper) : base(context, mapper)

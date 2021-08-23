@@ -17,7 +17,7 @@ namespace ProjectAPI.Controllers
     {
         //private readonly ProjectDbContext _context;
 
-        public CartsController(ProjectDbContext context, Mapper mapper) : base(context, mapper)
+        public CartsController(ProjectDbContext context, IMapper mapper) : base(context, mapper)
         {
           //  _context = context;
         }
@@ -60,7 +60,7 @@ namespace ProjectAPI.Controllers
 
         // PUT: api/Carts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+  /*    [HttpPut("{id}")]
         public async Task<IActionResult> PutCart(int id, CartDto cartDto)
         {
             var oldCart = await _context.Cart.FindAsync(id);
@@ -74,7 +74,7 @@ namespace ProjectAPI.Controllers
 
             _context.Entry(cart).State = EntityState.Modified; */
 
-            if (oldCart.CartItems == null)
+  /*          if (oldCart.CartItems == null)
             {
                 oldCart.CartItems = new List<CartItem>();
             }
@@ -105,6 +105,7 @@ namespace ProjectAPI.Controllers
             return NoContent();
         }
 
+*/
         // POST: api/Carts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
        /* [HttpPost]

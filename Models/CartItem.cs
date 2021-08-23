@@ -9,7 +9,7 @@ namespace ProjectAPI.Models
     public class CartItem
     {
         [Key]
-        public virtual int itemId { get; set; }
+        public virtual int Id { get; set; }
         public virtual int Quantity { get; set; }
     }
 }

@@ -76,7 +76,7 @@ namespace ProjectAPI.Controllers
         // PUT: api/Items/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutById(int id, IBaseDto item)
+        public virtual async Task<IActionResult> PutById(int id, IBaseDto item)
         {
             if (id != item.Id)
             {
@@ -111,7 +111,7 @@ namespace ProjectAPI.Controllers
         // POST: api/Items
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<BaseDto>> PostItem(BaseDto item)
+        public virtual async Task<ActionResult<BaseDto>> PostItem(IBaseDto item)
         {
             _dbSet.Add(_mapper.Map<IEntity>(item));
             await _context.SaveChangesAsync();
@@ -125,7 +125,7 @@ namespace ProjectAPI.Controllers
                 Id = item.Id
             };*/
 
-            var dto = _mapper.Map<BaseDto>(item);
+            //var dto = _mapper.Map<BaseDto>(item);
             
 
            

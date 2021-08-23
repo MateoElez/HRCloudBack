@@ -12,7 +12,7 @@ using ProjectAPI.Models.ItemFolder;
 namespace ProjectAPI.Controllers
 {
     [ApiController]
-    [Route("api/Items")]
+    [Route("api/[controller]")]
     public class ItemsController : APIControllerBase<Item, ItemDto>
     {
         public ItemsController(ProjectDbContext context, IMapper mapper) : base(context, mapper) {
