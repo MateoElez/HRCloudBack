@@ -7,7 +7,7 @@ namespace ProjectAPI.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            /*migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -91,29 +91,29 @@ namespace ProjectAPI.Migrations
                 defaultValue: "",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(150)",
-                oldNullable: true);*/
+                oldNullable: true);
 
-           /* migrationBuilder.AddColumn<string>(
+            migrationBuilder.AddColumn<string>(
                 name: "ItemImageUrl",
                 table: "Items",
                 type: "nvarchar(150)",
                 nullable: false,
-                defaultValue: "");*/
+                defaultValue: "");
 
             migrationBuilder.CreateTable(
                 name: "Cart",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId1 = table.Column<int>(type: "int", nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cart", x => x.UserId);
+                    table.PrimaryKey("PK_Cart", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cart_Users_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Cart_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -123,31 +123,31 @@ namespace ProjectAPI.Migrations
                 name: "CartItem",
                 columns: table => new
                 {
-                    itemId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    CartUserId = table.Column<int>(type: "int", nullable: true)
+                    CartId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartItem", x => x.itemId);
+                    table.PrimaryKey("PK_CartItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CartItem_Cart_CartUserId",
-                        column: x => x.CartUserId,
+                        name: "FK_CartItem_Cart_CartId",
+                        column: x => x.CartId,
                         principalTable: "Cart",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cart_UserId1",
+                name: "IX_Cart_UserId",
                 table: "Cart",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItem_CartUserId",
+                name: "IX_CartItem_CartId",
                 table: "CartItem",
-                column: "CartUserId");
+                column: "CartId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

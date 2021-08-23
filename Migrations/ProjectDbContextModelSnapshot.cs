@@ -21,37 +21,37 @@ namespace ProjectAPI.Migrations
 
             modelBuilder.Entity("ProjectAPI.Models.CartFolder.Cart", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("UserId1")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("ProjectAPI.Models.CartItem", b =>
                 {
-                    b.Property<int>("itemId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CartUserId")
+                    b.Property<int?>("CartId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("itemId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CartUserId");
+                    b.HasIndex("CartId");
 
                     b.ToTable("CartItem");
                 });
@@ -111,7 +111,7 @@ namespace ProjectAPI.Migrations
                 {
                     b.HasOne("ProjectAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -120,7 +120,7 @@ namespace ProjectAPI.Migrations
                 {
                     b.HasOne("ProjectAPI.Models.CartFolder.Cart", null)
                         .WithMany("CartItems")
-                        .HasForeignKey("CartUserId");
+                        .HasForeignKey("CartId");
                 });
 
             modelBuilder.Entity("ProjectAPI.Models.CartFolder.Cart", b =>
