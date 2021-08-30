@@ -131,11 +131,11 @@ namespace ProjectAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }*/
+        }
 
         private bool CartExists(int id)
         {
             return _context.Cart.Any(e => e.Id == id);
-        }
+        }*/
     }
 }

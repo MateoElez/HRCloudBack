@@ -15,6 +15,8 @@ namespace ProjectAPI.Models.BaseFolder
         {
             Id = entity.Id;
         }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public virtual int Id { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace ProjectAPI.Models
         {
             Id = dto.Id;
         }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public virtual int Id { get; set; }
 
